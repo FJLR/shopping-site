@@ -5,69 +5,57 @@
 // https://api.punkapi.com/v2/beers
 
 let total = 0;
+const tableBody = document.getElementById('table-body');
 
 //document.getElementById("total").innerText = total;
 
 fetch("https://fakestoreapi.com/products").then((data) => {
     //console.log(data); //JSON format
     return data.json(); //converted to object
-}).then((objectData) => {
-    //console.log(objectData);
-    //console.log(objectData[0].title);
+  })
+  .then((objectData) => {
+    const listOfRows = objectData.forEach((values) => {
+      const row = document.createElement("tr");
 
-    let tableData="";
-    objectData.map((values) => {
-        //tableData+=`<h1>${values.title}</h1>`;
-        tableData+=`<tr>
-        <td>${values.title}</td>
-        <td>${values.description}</td>
-        <td>${values.price}</td>
-        <td>${values.category}</td>
-        <td><img src="${values.image}"/>
+      const title = document.createElement("td");
+      title.innerText = values.title;
+      row.append(title);
 
-        
-        <button  onclick="addToCart(${values.price})">add to cart</button>
-        </td>
-      </tr>`;
+      const desc = document.createElement("td");
+      desc.innerText = values.description;
+      row.append(desc);
+
+      const price = document.createElement("td");
+      price.innerText = values.price;
+      row.append(price);
+
+      const category = document.createElement("td");
+      category.innerText = values.category;
+      row.append(category);
+
+      const imageTd = document.createElement("td");
+      const img = document.createElement("img");
+      const button = document.createElement("button");
+      button.textContent = "Add to cart";
+      img.src = values.image;
+      imageTd.append(img);
+      imageTd.append(button);
+
+      row.append(imageTd);
+
+      // button.addEventListener("click", () => {
+      //   items.push(values);
+      //   size.textContent = items.length;
+      //   total.textContent = items.reduce(
+      //     (total, item) => total + item.price,
+      //     0
+      //   );
+      // });
+      tableBody.append(row);
+
     });
-    document.getElementById("table-body").innerHTML=tableData;
 
-}).catch((error) => {
+  })
+  .catch((error) => {
     console.log(error);
-})
-
-function addToCart(price) {
-    //total = total + price
-
-    total += price
-    document.getElementById("total").innerText = total;
-    console.log(total);
-}
-
-
-// fetch("https://api.punkapi.com/v2/beers").then((data) => {
-//     //console.log(data); //JSON format
-//     return data.json(); //converted to object
-// }).then((objectData) => {
-//     //console.log(objectData);
-//     //console.log(objectData[0].title);
-
-//     let tableData="";
-//     objectData.map((values) => {
-//         //tableData+=`<h1>${values.title}</h1>`;
-//         tableData+=`<tr>
-//         <td>${values.name}</td>
-//         <td>${values.description}</td>
-//         <td>${values.method.fermentation.temp.value} ${values.method.fermentation.temp.unit}</td>
-//         <td><img src="${values.image_url}"/></td>
-//       </tr>`;
-//     });
-//     document.getElementById("table-body").innerHTML=tableData;
-
-// }).catch((error) => {
-//     console.log(error);
-// })
-
-
-// https://www.youtube.com/watch?v=vvjaRIM4Bjs&t=543s
-// https://www.youtube.com/watch?v=m_vL25vzpiE
+  });
