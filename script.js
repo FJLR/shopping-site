@@ -5,21 +5,25 @@
 // https://api.punkapi.com/v2/beers
 
 let total = 0;
-const cart = [];
-
+const cart = JSON.parse(localStorage.getItem('cart')) || [];
 const tableBody = document.getElementById("table-body");
+
 const size = document.getElementById("size");
+size.textContent = cart.length;
 
 document.getElementById("check-out").addEventListener("click", () => {
-  let total = 0;
-  let items = "";
-  cart.forEach((item) => {
-    items += item.title + "\n";
-    total += item.price;
-  });
-  alert(
-    `Checkout: ${cart.length} items:\n${items}\nfor a total of ${total.toFixed(2)}.`
-  );
+  history.go('check-out.html')
+  // let total = 0;
+  // let items = "";
+  // cart.forEach((item) => {
+  //   items += item.title + "\n";
+  //   total += item.price;
+  // });
+  // alert(
+  //   `Checkout: ${cart.length} items:\n${items}\nfor a total of ${total.toFixed(
+  //     2
+  //   )}.`
+  // );
 });
 
 //document.getElementById("total").innerText = total;
@@ -30,6 +34,9 @@ fetch("https://fakestoreapi.com/products")
     return data.json(); //converted to object
   })
   .then((products) => {
+    document.getElementById("site").classList.toggle("hidden");
+    document.getElementById("loading").classList.toggle("hidden");
+
     products.forEach((product) => {
       const row = document.createElement("tr");
 
@@ -62,6 +69,7 @@ fetch("https://fakestoreapi.com/products")
       button.addEventListener("click", () => {
         cart.push(product);
         size.textContent = cart.length;
+        localStorage.setItem("cart", JSON.stringify(cart));
       });
       tableBody.append(row);
     });

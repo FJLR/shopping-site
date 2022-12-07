@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check out</title>
+
+    <style>
+        #items {
+            padding: 10px;
+        }
+
+        .item-wrapper {
+            padding: 10px;
+            border: 4px solid cornflowerblue;
+            margin: 5px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="info">We have <span id="cart-size">0</span> items in the cart.
+
+        <div id="items">
+
+        </div>
+
+        <button id="purchase">Purchase!</button>
+    </div>
+
+    <div id="finalized" class="hidden">
+        <h3>You made your purchase!! Thanks!!</h3>
+    </div>
+
+    <script src="check-out.js"></script>
+</body>
+
+</html>

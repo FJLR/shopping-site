@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Store</title>
 
   <style>
     table,
@@ -17,28 +17,45 @@
     img {
       width: 100px;
     }
+
+    #loading {
+      display: flex;
+      justify-content: center;
+      padding-top: 25px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
   </style>
 </head>
 
 <body>
-  <!-- <div>The Total price is: <span id="total"></span></div> -->
-  <div>
-    <div>Cart size: <span id="size">0</span></div>
-    <button id="check-out">Check out</button>
+
+  <div id="loading">
+    <h2>Loading!!!</h2>
   </div>
 
-  <table style="width:100%">
+  <div id="site" class="hidden jonny">
+    <div>
+      <div>Cart size: <span id="size">0</span></div>
+      <button id="check-out">Check out</button>
+      <a href="check-out.html">Check out</a>
+    </div>
 
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Price</th>
-      <th>Category</th>
-      <th>Image</th>
-    </tr>
-    <tbody id="table-body">
-    </tbody>
-  </table>
+    <table style="width:100%">
+
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>Image</th>
+      </tr>
+      <tbody id="table-body">
+      </tbody>
+    </table>
+  </div>
 
 
   <script src="script.js"></script>
